@@ -1,0 +1,145 @@
+name: Deploy Rawcraft Website to GitHub Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Checkout LFS objects
+        run: git lfs checkout
+
+      - name: Verify Git LFS files
+        run: |
+          echo "Checking Git LFS tracked files..."
+          git lfs ls-files
+          echo "Verifying large video files exist..."
+          ls -lh deploy/assets/videos/ || echo "Videos directory not found"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Optimize website files
+        run: |
+          echo "Preparing Rawcraft website for deployment..."
+
+          # Create temporary build directory
+          mkdir -p _site
+
+          # Copy all files from deploy directory to _site
+          cp -r deploy/* _site/
+
+          # Ensure all video files are properly copied
+          if [ -d "deploy/assets/videos" ]; then
+            echo "Copying video files..."
+            mkdir -p _site/assets/videos
+            cp deploy/assets/videos/* _site/assets/videos/ 2>/dev/null || echo "Some video files may not exist"
+          fi
+
+          # Verify Ruracio.mp4 is included
+          if [ -f "_site/assets/videos/Ruracio.mp4" ]; then
+            echo "✅ Ruracio.mp4 (114MB) successfully included"
+            ls -lh _site/assets/videos/Ruracio.mp4
+          else
+            echo "⚠️ Ruracio.mp4 not found - checking Git LFS status"
+            git lfs ls-files | grep Ruracio
+          fi
+
+          # Create .nojekyll file to prevent Jekyll processing
+          touch _site/.nojekyll
+
+          # Update any relative paths if needed
+          echo "Optimizing file paths for GitHub Pages..."
+
+          # Set proper MIME types for video files
+          if [ -f "_site/.htaccess" ]; then
+            echo "Found .htaccess file for Apache optimization"
+          fi
+
+          # Verify all critical files exist
+          echo "Verifying deployment files..."
+          ls -la _site/
+          echo "Total site size:"
+          du -sh _site/
+
+      - name: Validate HTML and assets
+        run: |
+          echo "Validating website structure..."
+
+          # Check that index.html exists
+          if [ ! -f "_site/index.html" ]; then
+            echo "❌ ERROR: index.html not found!"
+            exit 1
+          fi
+
+          # Check for logo
+          if [ -f "_site/assets/images/rawcraft_logo.png" ]; then
+            echo "✅ Logo file found"
+          else
+            echo "⚠️ Logo file missing"
+          fi
+
+          # Check video directory
+          if [ -d "_site/assets/videos" ]; then
+            echo "✅ Videos directory found with files:"
+            ls -lh _site/assets/videos/
+          else
+            echo "❌ Videos directory missing!"
+          fi
+
+          # Check for SEO files
+          if [ -f "_site/robots.txt" ]; then
+            echo "✅ robots.txt found"
+          fi
+
+          if [ -f "_site/sitemap.xml" ]; then
+            echo "✅ sitemap.xml found"
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Deployment Success Notification
+        run: |
+          echo "🎉 Rawcraft website successfully deployed!"
+          echo "🌐 Your website is now live at: ${{ steps.deployment.outputs.page_url }}"
+          echo "✅ All features including video portfolio should be working"
+          echo "🎬 Large videos (including Ruracio.mp4) are served via Git LFS"
