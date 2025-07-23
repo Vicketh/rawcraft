@@ -1,0 +1,40 @@
+# Robots.txt for Rawcraft Website
+# Real Stories. Raw Energy. Refined Craft.
+
+User-agent: *
+Allow: /
+
+# Allow crawling of assets
+Allow: /assets/
+Allow: /assets/images/
+Allow: /assets/videos/
+
+# Block sensitive files
+Disallow: /deploy.config.js
+Disallow: /README.txt
+Disallow: /.htaccess
+
+# Block common admin/system directories (if they exist)
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /wp-content/
+Disallow: /cgi-bin/
+
+# Allow social media crawlers
+User-agent: facebookexternalhit/*
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Sitemap location (update with your actual domain)
+Sitemap: https://rawcraft.studio/sitemap.xml
+
+# Crawl delay (optional - helps with server load)
+Crawl-delay: 1
