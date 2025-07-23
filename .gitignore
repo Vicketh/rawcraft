@@ -1,8 +1,7 @@
-# Large video files (exceed GitHub's 100MB limit)
-assets/videos/Ruracio.mp4
-*.mp4
+# Git LFS will handle large video files
+# Remove video exclusions to allow LFS tracking
 
-# Large media files
+# Large media files (non-video)
 *.mov
 *.avi
 *.mkv
@@ -10,10 +9,9 @@ assets/videos/Ruracio.mp4
 *.flv
 *.webm
 
-# Large files over 50MB
-**/*.[Mm][Pp]4
-**/*.[Mm][Oo][Vv]
-**/*.[Aa][Vv][Ii]
+# Only exclude extremely large non-video files over 100MB
+# **/*.[Mm][Oo][Vv]
+# **/*.[Aa][Vv][Ii]
 
 # Temporary files
 .DS_Store
