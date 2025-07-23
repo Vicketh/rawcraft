@@ -1,0 +1,19 @@
+# Git commands to push changes to GitHub
+
+# Add the modified files
+git add index.html deploy/index.html
+
+# Commit with descriptive message
+git commit -m "Update gold colors for titles to better match logo
+
+- Changed gold gradient from bright yellows to more refined, muted tones
+- Updated from #ffd700, #e6c200 to #cfb53b, #d4af37 for sophisticated look
+- Modified both main index.html and deploy/index.html for consistency
+- Gold colors now use classic gold (#d4af37) and old gold (#cfb53b) tones
+- Updated text shadows and SVG gradients to match new palette"
+
+# Push to GitHub
+git push origin main
+
+# Check status after push
+git status
