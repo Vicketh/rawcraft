@@ -1,0 +1,45 @@
+# Large video files (exceed GitHub's 100MB limit)
+assets/videos/Ruracio.mp4
+*.mp4
+
+# Large media files
+*.mov
+*.avi
+*.mkv
+*.wmv
+*.flv
+*.webm
+
+# Large files over 50MB
+**/*.[Mm][Pp]4
+**/*.[Mm][Oo][Vv]
+**/*.[Aa][Vv][Ii]
+
+# Temporary files
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Log files
+*.log
+
+# Node modules (if any)
+node_modules/
+
+# Build directories
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Git LFS tracking (for future large files)
+# Use git lfs track "*.mp4" if you want to use Git LFS later
