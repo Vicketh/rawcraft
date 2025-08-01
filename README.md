@@ -33,7 +33,7 @@ A modern, responsive single-page website for Rawcraft, showcasing professional p
 ## 📁 Project Structure
 
 ```
-BLACK STUDIOS/
+rawcraft/
 ├── index.html              # Main website file
 ├── assets/                 # Media assets
 │   ├── videos/            # Video files
