@@ -520,7 +520,13 @@
                             {
                                 href: "#contact",
                                 className:
-                                    "inline-block bg-yellow-400 text-black font-bold px-8 py-3 rounded-full shadow-lg hover:bg-yellow-300 transition-colors",
+                                    "inline-block text-white font-bold px-8 py-3 rounded-full shadow-lg hover:bg-gray-800 transition-colors",
+                                style: {
+                                    background:
+                                        "linear-gradient(135deg, #000000 0%, #0d0d0d 100%)",
+                                    boxShadow:
+                                        "0 4px 15px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.1)",
+                                },
                             },
                             "Contact Us",
                         ),
@@ -1032,31 +1038,234 @@
                 // Initialize video data
                 useEffect(() => {
                     const initialData = {};
+                    const uniqueComments = {
+                        ruracio: [
+                            {
+                                id: 1,
+                                author: "Maria & Carlos",
+                                text: "Our wedding day captured perfectly! The emotions, the joy, everything is there. Thank you for making our memories eternal.",
+                                timestamp: "1 day ago",
+                            },
+                            {
+                                id: 2,
+                                author: "Wedding Guest",
+                                text: "I was at this wedding and seeing this video brought tears to my eyes again. Beautiful work!",
+                                timestamp: "3 days ago",
+                            },
+                            {
+                                id: 3,
+                                author: "Photography Pro",
+                                text: "The color grading and storytelling is exceptional. This is wedding videography at its finest.",
+                                timestamp: "1 week ago",
+                            },
+                        ],
+                        absa: [
+                            {
+                                id: 1,
+                                author: "ABSA Marketing Team",
+                                text: "Rawcraft delivered exactly what we envisioned. Professional, creative, and on-brand.",
+                                timestamp: "2 days ago",
+                            },
+                            {
+                                id: 2,
+                                author: "Corporate Client",
+                                text: "Working with Rawcraft was seamless. They understood our brand values and translated them beautifully into video.",
+                                timestamp: "5 days ago",
+                            },
+                            {
+                                id: 3,
+                                author: "Industry Observer",
+                                text: "This corporate video stands out from the typical boring content. Great storytelling approach!",
+                                timestamp: "1 week ago",
+                            },
+                        ],
+                        bensoul: [
+                            {
+                                id: 1,
+                                author: "Music Fan",
+                                text: "Bensoul's music paired with Rawcraft's visuals = pure magic! The aesthetics are incredible.",
+                                timestamp: "1 day ago",
+                            },
+                            {
+                                id: 2,
+                                author: "Video Director",
+                                text: "The creative direction and execution in this music video is top-tier. Love the visual storytelling.",
+                                timestamp: "4 days ago",
+                            },
+                            {
+                                id: 3,
+                                author: "Bensoul Fan",
+                                text: "This video perfectly captures the vibe of the song. Rawcraft knows how to bring music to life visually!",
+                                timestamp: "6 days ago",
+                            },
+                        ],
+                        kevo: [
+                            {
+                                id: 1,
+                                author: "Event Manager",
+                                text: "Behind the scenes footage that actually makes corporate events look exciting! Great work on capturing the energy.",
+                                timestamp: "3 hours ago",
+                            },
+                            {
+                                id: 2,
+                                author: "Nairobi Business",
+                                text: "This is exactly how we want our corporate events to be seen - dynamic, professional, and engaging.",
+                                timestamp: "2 days ago",
+                            },
+                            {
+                                id: 3,
+                                author: "Event Attendee",
+                                text: "I was at this event and Rawcraft captured moments I didn't even notice. Amazing attention to detail!",
+                                timestamp: "4 days ago",
+                            },
+                        ],
+                        lamu: [
+                            {
+                                id: 1,
+                                author: "Travel Enthusiast",
+                                text: "This video makes me want to book a trip to Lamu immediately! The cinematography showcases the beauty perfectly.",
+                                timestamp: "6 hours ago",
+                            },
+                            {
+                                id: 2,
+                                author: "Lamu Local",
+                                text: "As someone from Lamu, I'm impressed by how beautifully you captured our home. Thank you for showing its true essence.",
+                                timestamp: "1 day ago",
+                            },
+                            {
+                                id: 3,
+                                author: "Documentary Filmmaker",
+                                text: "The cultural sensitivity and artistic vision in this piece is remarkable. Lamu's heritage is honored beautifully.",
+                                timestamp: "3 days ago",
+                            },
+                        ],
+                        merab: [
+                            {
+                                id: 1,
+                                author: "Merab's Fan",
+                                text: "The collaboration between Rawcraft and Merab is pure fire! The creative chemistry is evident in every frame.",
+                                timestamp: "4 hours ago",
+                            },
+                            {
+                                id: 2,
+                                author: "Creative Director",
+                                text: "This is what happens when two creative powerhouses collaborate. The storytelling and execution are flawless.",
+                                timestamp: "1 day ago",
+                            },
+                            {
+                                id: 3,
+                                author: "Content Creator",
+                                text: "Rawcraft's ability to bring out the best in collaborations is unmatched. This piece with Merab is inspiring!",
+                                timestamp: "2 days ago",
+                            },
+                        ],
+                        drone: [
+                            {
+                                id: 1,
+                                author: "Drone Pilot",
+                                text: "As a fellow licensed pilot, I'm impressed by the smooth movements and creative angles. Professional drone work!",
+                                timestamp: "30 minutes ago",
+                            },
+                            {
+                                id: 2,
+                                author: "Real Estate Agent",
+                                text: "These aerial shots would be perfect for our property listings. The perspective and quality are outstanding.",
+                                timestamp: "5 hours ago",
+                            },
+                            {
+                                id: 3,
+                                author: "Film Student",
+                                text: "The way you use drone cinematography to enhance storytelling is masterful. Learning so much from your work!",
+                                timestamp: "1 day ago",
+                            },
+                        ],
+                    };
+
+                    const uniqueReviews = {
+                        ruracio: [
+                            {
+                                id: 1,
+                                author: "Bride & Groom",
+                                rating: 5,
+                                text: "Rawcraft made our special day even more special. We can't stop watching our wedding video!",
+                                timestamp: "2 days ago",
+                            },
+                        ],
+                        absa: [
+                            {
+                                id: 1,
+                                author: "ABSA Executive",
+                                rating: 5,
+                                text: "Professional service from start to finish. The final video exceeded our expectations and enhanced our brand image.",
+                                timestamp: "1 week ago",
+                            },
+                        ],
+                        bensoul: [
+                            {
+                                id: 1,
+                                author: "Music Producer",
+                                rating: 5,
+                                text: "Rawcraft understands music and visual harmony. They brought Bensoul's vision to life perfectly.",
+                                timestamp: "5 days ago",
+                            },
+                        ],
+                        kevo: [
+                            {
+                                id: 1,
+                                author: "Corporate Client",
+                                rating: 5,
+                                text: "Turned our corporate event into a cinematic experience. The team's professionalism and creativity are unmatched.",
+                                timestamp: "3 days ago",
+                            },
+                        ],
+                        lamu: [
+                            {
+                                id: 1,
+                                author: "Tourism Board",
+                                rating: 5,
+                                text: "Rawcraft captured Lamu's beauty and cultural heritage with such respect and artistry. Truly exceptional work.",
+                                timestamp: "4 days ago",
+                            },
+                        ],
+                        merab: [
+                            {
+                                id: 1,
+                                author: "Collaboration Partner",
+                                rating: 5,
+                                text: "Working with Rawcraft on this project was inspiring. Their creative vision and execution are world-class.",
+                                timestamp: "6 days ago",
+                            },
+                        ],
+                        drone: [
+                            {
+                                id: 1,
+                                author: "Aviation Enthusiast",
+                                rating: 5,
+                                text: "Licensed professionals who know their craft. The aerial cinematography adds incredible value to any project.",
+                                timestamp: "1 day ago",
+                            },
+                        ],
+                    };
+
                     media.forEach((item) => {
                         initialData[item.id] = {
-                            likes: Math.floor(Math.random() * 50) + 10, // Random initial likes
+                            likes: Math.floor(Math.random() * 50) + 15,
                             liked: false,
-                            comments: [
+                            comments: uniqueComments[item.id] || [
                                 {
                                     id: 1,
-                                    author: "Sarah M.",
-                                    text: "Amazing work! The cinematography is stunning.",
-                                    timestamp: "2 days ago",
-                                },
-                                {
-                                    id: 2,
-                                    author: "John K.",
-                                    text: "Professional quality, highly recommend!",
-                                    timestamp: "1 week ago",
+                                    author: "User",
+                                    text: "Great work!",
+                                    timestamp: "1 day ago",
                                 },
                             ],
-                            reviews: [
+                            reviews: uniqueReviews[item.id] || [
                                 {
                                     id: 1,
-                                    author: "Client A.",
+                                    author: "Client",
                                     rating: 5,
-                                    text: "Exceptional service and beautiful results!",
-                                    timestamp: "3 days ago",
+                                    text: "Excellent service!",
+                                    timestamp: "2 days ago",
                                 },
                             ],
                         };
@@ -1318,13 +1527,19 @@
                                                             ? "text-white"
                                                             : "text-gray-300 hover:bg-red-500 border border-gray-600"
                                                     }`,
-                                                    style: currentVideoData.liked ? {
-                                                        background: "linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%)",
-                                                        boxShadow: "0 4px 15px rgba(220, 38, 38, 0.4), inset 0 1px 2px rgba(255,255,255,0.2)"
-                                                    } : {
-                                                        background: "linear-gradient(135deg, #000000 0%, #0d0d0d 100%)",
-                                                        boxShadow: "0 2px 8px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.1)"
-                                                    },
+                                                    style: currentVideoData.liked
+                                                        ? {
+                                                              background:
+                                                                  "linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%)",
+                                                              boxShadow:
+                                                                  "0 4px 15px rgba(220, 38, 38, 0.4), inset 0 1px 2px rgba(255,255,255,0.2)",
+                                                          }
+                                                        : {
+                                                              background:
+                                                                  "linear-gradient(135deg, #000000 0%, #0d0d0d 100%)",
+                                                              boxShadow:
+                                                                  "0 2px 8px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.1)",
+                                                          },
                                                     onClick: () =>
                                                         handleLike(
                                                             modal.item.id,
@@ -1349,16 +1564,17 @@
                                 ),
 
                                 // Right Side - Comments & Reviews
-                                },
                                 React.createElement(
                                     "div",
                                     {
                                         className:
                                             "lg:w-1/3 bg-gradient-to-b from-black to-black flex flex-col max-h-[95vh] border-l border-gray-800",
                                         style: {
-                                            background: "linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)",
-                                            boxShadow: "inset 0 0 50px rgba(255,255,255,0.05)"
-                                        }
+                                            background:
+                                                "linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)",
+                                            boxShadow:
+                                                "inset 0 0 50px rgba(255,255,255,0.05)",
+                                        },
                                     },
 
                                     // Header
@@ -1368,9 +1584,11 @@
                                             className:
                                                 "p-4 border-b border-gray-800 bg-black",
                                             style: {
-                                                background: "linear-gradient(135deg, #000000 0%, #0d0d0d 100%)",
-                                                boxShadow: "0 2px 10px rgba(0,0,0,0.5)"
-                                            }
+                                                background:
+                                                    "linear-gradient(135deg, #000000 0%, #0d0d0d 100%)",
+                                                boxShadow:
+                                                    "0 2px 10px rgba(0,0,0,0.5)",
+                                            },
                                         },
                                         React.createElement(
                                             "h4",
@@ -1389,9 +1607,11 @@
                                             className:
                                                 "flex-1 overflow-y-auto p-4 space-y-4",
                                             style: {
-                                                background: "linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)",
-                                                boxShadow: "inset 0 0 30px rgba(255,255,255,0.03)"
-                                            }
+                                                background:
+                                                    "linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)",
+                                                boxShadow:
+                                                    "inset 0 0 30px rgba(255,255,255,0.03)",
+                                            },
                                         },
 
                                         // Comments Section
@@ -1415,9 +1635,11 @@
                                                             className:
                                                                 "rounded-lg p-3 border border-gray-800 shadow-lg",
                                                             style: {
-                                                                background: "linear-gradient(135deg, #000000 0%, #0d0d0d 50%, #000000 100%)",
-                                                                boxShadow: "0 4px 15px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.1)"
-                                                            }
+                                                                background:
+                                                                    "linear-gradient(135deg, #000000 0%, #0d0d0d 50%, #000000 100%)",
+                                                                boxShadow:
+                                                                    "0 4px 15px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.1)",
+                                                            },
                                                         },
                                                         React.createElement(
                                                             "div",
@@ -1478,9 +1700,11 @@
                                                             className:
                                                                 "rounded-lg p-3 border border-gray-800 shadow-lg",
                                                             style: {
-                                                                background: "linear-gradient(135deg, #000000 0%, #0d0d0d 50%, #000000 100%)",
-                                                                boxShadow: "0 4px 15px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.1)"
-                                                            }
+                                                                background:
+                                                                    "linear-gradient(135deg, #000000 0%, #0d0d0d 50%, #000000 100%)",
+                                                                boxShadow:
+                                                                    "0 4px 15px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.1)",
+                                                            },
                                                         },
                                                         React.createElement(
                                                             "div",
@@ -1544,9 +1768,11 @@
                                             className:
                                                 "p-4 border-t border-gray-800 space-y-4",
                                             style: {
-                                                background: "linear-gradient(135deg, #000000 0%, #0d0d0d 100%)",
-                                                boxShadow: "0 -2px 10px rgba(0,0,0,0.5)"
-                                            }
+                                                background:
+                                                    "linear-gradient(135deg, #000000 0%, #0d0d0d 100%)",
+                                                boxShadow:
+                                                    "0 -2px 10px rgba(0,0,0,0.5)",
+                                            },
                                         },
 
                                         // Comment Input
@@ -1557,8 +1783,10 @@
                                                 className:
                                                     "w-full text-white rounded-lg p-3 text-sm resize-none border border-gray-700 focus:border-white outline-none placeholder-gray-400",
                                                 style: {
-                                                    background: "linear-gradient(135deg, #000000 0%, #0d0d0d 100%)",
-                                                    boxShadow: "inset 0 2px 5px rgba(0,0,0,0.5)"
+                                                    background:
+                                                        "linear-gradient(135deg, #000000 0%, #0d0d0d 100%)",
+                                                    boxShadow:
+                                                        "inset 0 2px 5px rgba(0,0,0,0.5)",
                                                 },
                                                 placeholder: "Add a comment...",
                                                 rows: 2,
@@ -1572,7 +1800,13 @@
                                                 "button",
                                                 {
                                                     className:
-                                                        "w-full bg-yellow-400 text-black font-medium py-2 px-4 rounded-lg hover:bg-yellow-300 transition-colors text-sm",
+                                                        "w-full text-white font-medium py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors text-sm",
+                                                    style: {
+                                                        background:
+                                                            "linear-gradient(135deg, #000000 0%, #0d0d0d 100%)",
+                                                        boxShadow:
+                                                            "0 2px 8px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.1)",
+                                                    },
                                                     onClick: () =>
                                                         handleComment(
                                                             modal.item.id,
@@ -1636,8 +1870,10 @@
                                                 className:
                                                     "w-full text-white rounded-lg p-3 text-sm resize-none border border-gray-700 focus:border-white outline-none placeholder-gray-400",
                                                 style: {
-                                                    background: "linear-gradient(135deg, #000000 0%, #0d0d0d 100%)",
-                                                    boxShadow: "inset 0 2px 5px rgba(0,0,0,0.5)"
+                                                    background:
+                                                        "linear-gradient(135deg, #000000 0%, #0d0d0d 100%)",
+                                                    boxShadow:
+                                                        "inset 0 2px 5px rgba(0,0,0,0.5)",
                                                 },
                                                 placeholder:
                                                     "Write a review...",
@@ -1653,7 +1889,13 @@
                                                 "button",
                                                 {
                                                     className:
-                                                        "w-full bg-yellow-400 text-black font-medium py-2 px-4 rounded-lg hover:bg-yellow-300 transition-colors text-sm",
+                                                        "w-full text-white font-medium py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors text-sm",
+                                                    style: {
+                                                        background:
+                                                            "linear-gradient(135deg, #000000 0%, #0d0d0d 100%)",
+                                                        boxShadow:
+                                                            "0 2px 8px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.1)",
+                                                    },
                                                     onClick: () =>
                                                         handleReview(
                                                             modal.item.id,
@@ -1889,7 +2131,13 @@
                             {
                                 type: "submit",
                                 className:
-                                    "w-full bg-yellow-400 text-gray-900 font-bold py-3 rounded hover:bg-yellow-300 transition-colors",
+                                    "w-full text-white font-bold py-3 rounded hover:bg-gray-800 transition-colors",
+                                style: {
+                                    background:
+                                        "linear-gradient(135deg, #000000 0%, #0d0d0d 100%)",
+                                    boxShadow:
+                                        "0 2px 8px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.1)",
+                                },
                             },
                             "Send Message",
                         ),
