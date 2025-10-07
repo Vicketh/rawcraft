@@ -958,7 +958,7 @@
             }
             // Portfolio with enhanced modal support
             function Portfolio() {
-                // Placeholder: videos and photos (photos will be added by user)
+                // All 10 videos for the portfolio
                 const media = [
                     // Videos
                     {
@@ -1024,6 +1024,33 @@
                         quote: '"Every angle tells a story, every height reveals beauty." – RawCraft',
                         id: "drone",
                     },
+                    {
+                        src: "assets/videos/Unapologetic series - Olivce Karmen.mp4",
+                        title: "Unapologetic Series - Olivce Karmen",
+                        type: "video",
+                        description:
+                            "An artistic collaboration featuring Olivce Karmen, showcasing raw emotion and authentic storytelling.",
+                        quote: '"Authenticity is the soul of every great story." – RawCraft',
+                        id: "unapologetic",
+                    },
+                    {
+                        src: "assets/videos/Belgut Marathon Short Documentary.mp4",
+                        title: "Belgut Marathon Documentary",
+                        type: "video",
+                        description:
+                            "A compelling short documentary capturing the spirit and determination of the Belgut Marathon runners.",
+                        quote: '"Every step tells a story of perseverance." – RawCraft',
+                        id: "belgut",
+                    },
+                    {
+                        src: "assets/videos/Siaya Park.mp4",
+                        title: "Siaya Park",
+                        type: "video",
+                        description:
+                            "A serene exploration of Siaya Park, showcasing the natural beauty and peaceful atmosphere of this hidden gem.",
+                        quote: '"Nature speaks in frames of quiet beauty." – RawCraft',
+                        id: "siaya",
+                    },
                 ];
 
                 // Enhanced modal state with interaction data
@@ -1034,6 +1061,52 @@
                     rating: 5,
                     text: "",
                 });
+
+                // Video refs for IntersectionObserver
+                const videoRefs = useRef([]);
+
+                // IntersectionObserver for scroll-based autoplay
+                useEffect(() => {
+                    const observer = new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach((entry) => {
+                                const video = entry.target;
+                                if (entry.isIntersecting) {
+                                    // Video is in viewport, play it
+                                    video.play().catch((error) => {
+                                        console.log(
+                                            "Autoplay prevented:",
+                                            error,
+                                        );
+                                    });
+                                } else {
+                                    // Video is out of viewport, pause it
+                                    video.pause();
+                                }
+                            });
+                        },
+                        {
+                            threshold: 0.5, // Play when 50% of video is visible
+                            rootMargin: "0px",
+                        },
+                    );
+
+                    // Observe all video elements
+                    videoRefs.current.forEach((video) => {
+                        if (video) {
+                            observer.observe(video);
+                        }
+                    });
+
+                    // Cleanup observer on unmount
+                    return () => {
+                        videoRefs.current.forEach((video) => {
+                            if (video) {
+                                observer.unobserve(video);
+                            }
+                        });
+                    };
+                }, []);
 
                 // Initialize video data
                 useEffect(() => {
@@ -1179,6 +1252,66 @@
                                 timestamp: "1 day ago",
                             },
                         ],
+                        unapologetic: [
+                            {
+                                id: 1,
+                                author: "Art Enthusiast",
+                                text: "The artistic vision in this collaboration is breathtaking. Olivce Karmen and Rawcraft created something truly special.",
+                                timestamp: "2 hours ago",
+                            },
+                            {
+                                id: 2,
+                                author: "Creative Director",
+                                text: "This is what happens when two authentic artists collaborate. The raw emotion is captured perfectly.",
+                                timestamp: "1 day ago",
+                            },
+                            {
+                                id: 3,
+                                author: "Film Critic",
+                                text: "Unapologetic storytelling at its finest. The visual narrative complements the subject beautifully.",
+                                timestamp: "3 days ago",
+                            },
+                        ],
+                        belgut: [
+                            {
+                                id: 1,
+                                author: "Marathon Runner",
+                                text: "As someone who participated in this marathon, seeing this documentary brought back all the emotions. Incredible work!",
+                                timestamp: "5 hours ago",
+                            },
+                            {
+                                id: 2,
+                                author: "Sports Enthusiast",
+                                text: "The way you captured the determination and spirit of the runners is inspiring. This is documentary filmmaking at its best.",
+                                timestamp: "2 days ago",
+                            },
+                            {
+                                id: 3,
+                                author: "Local Resident",
+                                text: "Thank you for showcasing our community event with such respect and artistry. You captured the heart of Belgut.",
+                                timestamp: "4 days ago",
+                            },
+                        ],
+                        siaya: [
+                            {
+                                id: 1,
+                                author: "Nature Lover",
+                                text: "This video makes me want to visit Siaya Park immediately. The serene beauty is captured perfectly.",
+                                timestamp: "3 hours ago",
+                            },
+                            {
+                                id: 2,
+                                author: "Environmental Advocate",
+                                text: "Beautiful showcase of Kenya's natural heritage. Rawcraft's eye for natural beauty is exceptional.",
+                                timestamp: "1 day ago",
+                            },
+                            {
+                                id: 3,
+                                author: "Park Visitor",
+                                text: "I've been to Siaya Park many times, but this video shows angles and beauty I never noticed. Masterful cinematography!",
+                                timestamp: "2 days ago",
+                            },
+                        ],
                     };
 
                     const uniqueReviews = {
@@ -1243,6 +1376,33 @@
                                 rating: 5,
                                 text: "Licensed professionals who know their craft. The aerial cinematography adds incredible value to any project.",
                                 timestamp: "1 day ago",
+                            },
+                        ],
+                        unapologetic: [
+                            {
+                                id: 1,
+                                author: "Olivce Karmen",
+                                rating: 5,
+                                text: "Working with Rawcraft was an incredible experience. They understood my vision and elevated it beyond my expectations.",
+                                timestamp: "1 day ago",
+                            },
+                        ],
+                        belgut: [
+                            {
+                                id: 1,
+                                author: "Marathon Organizer",
+                                rating: 5,
+                                text: "Rawcraft captured the essence of our marathon perfectly. The documentary will inspire future participants for years to come.",
+                                timestamp: "3 days ago",
+                            },
+                        ],
+                        siaya: [
+                            {
+                                id: 1,
+                                author: "Park Management",
+                                rating: 5,
+                                text: "This video showcases Siaya Park's natural beauty better than any marketing material we could create. Outstanding work!",
+                                timestamp: "2 days ago",
                             },
                         ],
                     };
@@ -1385,25 +1545,20 @@
                                     },
                                     item.type === "video"
                                         ? React.createElement("video", {
+                                              ref: (el) =>
+                                                  (videoRefs.current[i] = el),
                                               src: item.src,
                                               className:
                                                   "w-full h-full object-cover rounded-lg",
-                                              autoPlay: true,
+                                              autoPlay: false,
                                               muted: true,
-                                              loop: false,
+                                              loop: true,
                                               playsInline: true,
                                               preload: "metadata",
                                               title: item.title,
                                               loading: "lazy",
                                               onLoadedMetadata: function (e) {
                                                   e.target.currentTime = 0;
-                                              },
-                                              onTimeUpdate: function (e) {
-                                                  if (
-                                                      e.target.currentTime > 10
-                                                  ) {
-                                                      e.target.currentTime = 0;
-                                                  }
                                               },
                                               controls: false,
                                           })
